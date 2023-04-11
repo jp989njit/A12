@@ -1,1 +1,41 @@
 A12
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cookie Example</title>
+  <script>
+    function setCookie() {
+      var cookieName = "exampleCookie";
+      var cookieValue = "Hello, World!";
+      var expires = new Date();
+      expires.setTime(expires.getTime() + (24 * 60 * 60 * 1000)); // 1 day from now
+      document.cookie = cookieName + "=" + cookieValue + ";expires=" + expires.toUTCString() + ";path=/";
+    }
+
+    function getCookie() {
+      var cookieName = "exampleCookie";
+      var cookieArray = document.cookie.split("; ");
+      for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i].split("=");
+        if (cookie[0] === cookieName) {
+          return cookie[1];
+        }
+      }
+      return "";
+    }
+
+    window.onload = function() {
+      var cookieValue = getCookie();
+      if (cookieValue !== "") {
+        document.getElementById("cookieValue").innerText = cookieValue;
+      } else {
+        setCookie();
+      }
+    };
+  </script>
+</head>
+<body>
+  <h1>Cookie Example</h1>
+  <p>Cookie Value: <span id="cookieValue"></span></p>
+</body>
+</html>
